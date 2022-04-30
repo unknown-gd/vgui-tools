@@ -1,42 +1,11 @@
-local whitelist = {
-	["atlaschat.chat.list"] = true,
-	["CGMODMouseInput"] = true,
-	["atlaschat.chat"] = true,
-	["ControlPanel"] = true,
-	["ContextMenu"] = true,
-	["xlib_Panel"] = true,
-	["SpawnMenu"] = true,
-	["DMenuBar"] = true,
-	["DMenu"] = true,
-	["Panel"] = true
-}
-
-local blacklist = {
-    ["scoreboard"] = true,
-    ["gcompute"] = true,
-    ["playx"] = true,
-    ["menu"] = true,
-    ["f1"] = true,
-    ["f2"] = true,
-    ["f3"] = true,
-    ["f4"] = true
-}
-
 local ipairs = ipairs
 local function can_remove( pnl, filters )
     if IsValid( pnl ) then
-
         local name = pnl:GetName()
-        if (#filters > 0) then
-            for num, filter in ipairs( filters ) do
-                if name:match( filter ) then
-                    return true
-                end
+        for num, filter in ipairs( filters ) do
+            if name:match( filter ) then
+                return true
             end
-        else
-            if blacklist[ name ] then return false end
-            if whitelist[ name ] then return true end
-            if whitelist[ pnl:GetClassName() ] then return true end
         end
 
         return false
