@@ -30,4 +30,14 @@ do
         end
     end)
 
+    concommand.Add("vgui_list", function( ply, cmd, args )
+        local num = 0
+        for key, value in pairs( debug_getregistry() ) do
+            if ispanel( value ) then
+                num = num + 1
+                MsgC( "[", cmd, "] ", num, ". ", ColorRand(), value:GetName(), " (", value:GetClassName(), ")\n" )
+            end
+        end
+    end)
+
 end
