@@ -31,7 +31,6 @@ do
     end)
 
     concommand.Add("vgui_list", function( ply, cmd, args )
-
         local start_num = (args[1] and args[2]) and args[1] or 0
         local end_num = args[2] or args[1]
         local check = args[1] ~= nil or args[2] ~= nil
