@@ -1,63 +1,87 @@
-local ipairs = ipairs
-local function can_remove( pnl, filters )
-    if IsValid( pnl ) then
-        local name = pnl:GetName()
-        for num, filter in ipairs( filters ) do
-            if name:match( filter ) then
-                return true
+local debug_getregistry = debug.getregistry
+local string_format = string.format
+local string_find = string.find
+local ispanel = ispanel
+local pairs = pairs
+local Msg = Msg
+local meta = FindMetaTable("Panel")
+local toString = meta.__tostring
+local isValid = meta.IsValid
+local getName = meta.GetName
+local remove = meta.Remove
+concommand.Add("vgui_cleanup", function(ply, cmd, args)
+  for _, panel in pairs(debug_getregistry()) do
+    local _continue_0 = false
+    repeat
+      if not (ispanel(panel) and isValid(panel)) then
+        _continue_0 = true
+        break
+      end
+      local name = getName(panel)
+      for _index_0 = 1, #args do
+        local _continue_1 = false
+        repeat
+          do
+            local pattern = args[_index_0]
+            if not (string_find(name, pattern, 1, false)) then
+              _continue_1 = true
+              break
             end
+            Msg(string_format("[%s] %s has been removed.\n", cmd, toString(panel)))
+            remove(panel)
+            break
+          end
+          _continue_1 = true
+        until true
+        if not _continue_1 then
+          break
         end
-
-        return false
+      end
+      _continue_0 = true
+    until true
+    if not _continue_0 then
+      break
     end
-
-    return true
-end
-
-do
-
-    local debug_getregistry = debug.getregistry
-    local ispanel = ispanel
-    local pairs = pairs
-
-    concommand.Add("vgui_cleanup", function( ply, cmd, args )
-        for num, pnl in pairs( debug_getregistry() ) do
-            if ispanel( pnl ) and can_remove( pnl, args ) then
-                MsgC( "[", cmd, "] Removed: ", ColorRand(), pnl:GetName(), " (", pnl:GetClassName(), ")\n" )
-                pnl:Remove()
-                pnl = nil
-            end
+  end
+end)
+return concommand.Add("vgui_list", function(ply, cmd, args)
+  local startPos, endPos = args[1], args[2]
+  local hasArgs = startPos ~= nil or endPos ~= nil
+  local counter = 0
+  if hasArgs then
+    if startPos then
+      startPos = tonumber(startPos) or 1
+    else
+      startPos = 1
+    end
+    if endPos then
+      endPos = tonumber(endPos) or startPos
+    else
+      startPos, endPos = 1, startPos
+    end
+  end
+  Msg(string_format("[%s] Panel list:\n", cmd))
+  for _, panel in pairs(debug_getregistry()) do
+    local _continue_0 = false
+    repeat
+      if not (ispanel(panel) and isValid(panel)) then
+        _continue_0 = true
+        break
+      end
+      counter = counter + 1
+      if hasArgs then
+        if counter < startPos then
+          _continue_0 = true
+          break
+        elseif counter > endPos then
+          break
         end
-    end)
-
-    concommand.Add("vgui_list", function( ply, cmd, args )
-        local start_num = (args[1] and args[2]) and args[1] or 0
-        local end_num = args[2] or args[1]
-        local check = args[1] ~= nil or args[2] ~= nil
-
-        if (check) then
-            if (start_num) then
-                start_num = tonumber( start_num )
-            end
-
-            if (end_num) then
-                end_num = tonumber( end_num )
-            end
-        end
-
-        local num = 0
-        for key, value in pairs( debug_getregistry() ) do
-            if ispanel( value ) then
-                num = num + 1
-
-                if (check) then
-                    if (num < start_num) then continue end
-                    if (num > end_num) then break end
-                end
-
-                MsgC( "[", cmd, "] ", num, ". ", ColorRand(), value:GetName(), " (", value:GetClassName(), ")\n" )
-            end
-        end
-    end)
-
-end
+      end
+      Msg(string_format("%d. %s\n", counter, toString(panel)))
+      _continue_0 = true
+    until true
+    if not _continue_0 then
+      break
+    end
+  end
+end)
