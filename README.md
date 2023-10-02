@@ -1,4 +1,4 @@
-# gmod_vgui_cleanup
+# vgui-cleanup
 `vgui_cleanup` - console command for removing `vgui` panels using [`patterns`](https://wiki.facepunch.com/gmod/Patterns)
 
 ![image](https://user-images.githubusercontent.com/44779902/166103527-f07a0e5a-71e4-47a7-8056-6ff0d9ab7ddc.png)
