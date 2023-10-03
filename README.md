@@ -1,5 +1,9 @@
 # vgui-cleanup
 
+### How to install
+1. Download `vgui-cleanup.zip` from the [latest release](https://github.com/PrikolMen/vgui-cleanup/releases/latest).
+2. Unzip the downloaded zip into the `garrysmod/addons/` folder.
+
 ### Commands
 - `vgui_cleanup <pattern>` - allow you remove `vgui` panels using [`patterns`](https://wiki.facepunch.com/gmod/Patterns)
 - `vgui_list <start pos/end pos> <end pos>` - outputs the list of all valid panels to the console, you can specify the length of the output list or the start and end points in the list.
