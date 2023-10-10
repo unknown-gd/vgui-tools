@@ -1,4 +1,4 @@
-# vgui-tools
+# VGUI Tools
 A small pack of console commands for the vgui developer in Garry's Mod.
 
 ### How to install
