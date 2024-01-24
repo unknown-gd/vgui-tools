@@ -1,6 +1,6 @@
 :find, :format = string
 :Add = concommand
-print = print
+MsgN = MsgN
 
 PANEL = FindMetaTable( "Panel" )
 :Remove, :GetName, :__tostring = PANEL
@@ -44,7 +44,7 @@ do
             name = GetName( panel )
             for pattern in *patterns
                 if find( name, pattern, 1, false ) ~= nil
-                    print( "[" .. cmd .. "] " .. __tostring( panel ) .. " has been removed." )
+                    MsgN( "[" .. cmd .. "] " .. __tostring( panel ) .. " has been removed." )
                     Remove( panel )
                     break
 
@@ -75,8 +75,8 @@ do
         children = @GetChildren!
         count = #children
 
-        print( space .. "║" )
-        print( space .. ( isLast and "╚" or "╠" ) .. "══ " .. __tostring( @ ) )
+        MsgN( space .. "║" )
+        MsgN( space .. ( isLast and "╚" or "╠" ) .. "══ " .. __tostring( @ ) )
 
         if count == 0
             return
@@ -99,7 +99,7 @@ Add "vgui_list", ( _, cmd, args ) ->
         else
             endPos = startPos
 
-    print( "[" .. cmd .. "] Panels: " )
+    MsgN( "[" .. cmd .. "] Panels: " )
     counter = 0
 
     for panel in *getPanels( true )
@@ -112,7 +112,7 @@ Add "vgui_list", ( _, cmd, args ) ->
             if counter > endPos
                 break
 
-        print( counter .. ". " .. __tostring( panel ) )
+        MsgN( __tostring( panel ) )
 
         unless hasArgs
             continue
@@ -125,7 +125,7 @@ Add "vgui_list", ( _, cmd, args ) ->
         for i = 1, count
             printTree( children[ i ], 1, i == count )
 
-    print!
+    MsgN!
 
 Add "vgui_find", ( _, cmd, args ) ->
     founded, length = {}, 0
@@ -138,8 +138,9 @@ Add "vgui_find", ( _, cmd, args ) ->
                 founded[ length ] = __tostring( panel )
 
     if length == 0
-        print( "[" .. cmd .. "] Panels not found." )
+        MsgN( "[" .. cmd .. "] Panels not found." )
         return
 
+    MsgN( "[" .. cmd .. "] Found " .. length .. " panels: " )
     for index = 1, length
-        print( index .. ". ", founded[ index ] )
+        MsgN( founded[ index ] )
