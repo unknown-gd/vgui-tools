@@ -1,12 +1,8 @@
 # VGUI Tools
 A small pack of console commands for vgui development in Garry's Mod.
 
-### How to install
-1. Download `vgui-cleanup.zip` from the [latest release](https://github.com/PrikolMen/vgui-cleanup/releases/latest).
-2. Unzip the downloaded zip into the `garrysmod/addons/` folder.
-
 ## Where is Lua code?
-Written in [Yuescript](https://github.com/pigpigyyy/Yuescript), compiled Lua code can be found in [releases](https://github.com/PrikolMen/vgui-cleanup/releases), or you can compile it yourself using compiled [Yuescript Compiler](https://github.com/pigpigyyy/Yuescript/releases/latest).
+Written in [Yuescript](https://github.com/pigpigyyy/Yuescript), compiled Lua code can be found in [releases](https://github.com/PrikolMen/vgui-cleanup/releases) and [lua branch](https://github.com/PrikolMen/vgui-tools/tree/lua), or you can compile it yourself using compiled [Yuescript Compiler](https://github.com/pigpigyyy/Yuescript/releases/latest).
 
 ### Commands
 - `vgui_remove <pattern>` - allow you remove `vgui` panels using [`patterns`](https://wiki.facepunch.com/gmod/Patterns)
